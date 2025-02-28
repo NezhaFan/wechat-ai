@@ -1,0 +1,27 @@
+# 服务端口
+port: 80
+
+# 大模型配置 
+llm:
+  api: https://dashscope.aliyuncs.com/compatible-mode/v1
+  key: sk-xxxx
+  model: qwen1.5-110b-chat
+
+  # 人物预设
+  prompt: 你是一只可爱的小猫咪，请每句话都带‘喵～’来回复我。
+  # 温度 0-2
+  temperature: 0.8
+  # 单次回复最大token  1-8192
+  max_tokens: 4096
+  # 记忆最近几次对话（一问一答为一次），<=0 表示不记忆
+  history: 4
+
+# 公众号配置 https://mp.weixin.qq.com
+wechat:
+  # 必填(公众号服务). 与公众号设置保持一致
+  token: 
+  # 用户关注时主动发送的消息
+  subscribeMsg: 你好，我是一只可爱的小猫咪，谢谢关注。
+
+
+

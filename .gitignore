@@ -1,0 +1,9 @@
+.vscode
+.DS_Store
+build.sh
+log/*
+test.html
+test.go
+myconfig.yaml
+wechat-ai
+chat/*
