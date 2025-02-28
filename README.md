@@ -1,4 +1,5 @@
 ### 请喜欢的同学给个🌟关注一下
+### 之前是 对接 OpenAI 的，太老了，重写了一下。
 
 ### 一、介绍
 - 这是一个用于**公众号对接大模型聊天**的项目。
@@ -17,12 +18,16 @@
 - 配置大模型 
   - 阿里百炼 
     - 申请Key https://bailian.console.aliyun.com/?apiKey=1#/api-key 
-    - 模型列表  https://help.aliyun.com/zh/model-studio/getting-started/models
-  - DeepSeek (不推荐，没有小模型，速度比较慢)
+    - 模型列表  https://help.aliyun.com/zh/model-studio/getting-started/models 
+  - 字节火山引擎
+    - 申请Key https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey
+    - 模型列表 https://console.volcengine.com/ark/region:ark+cn-beijing/model
+  - DeepSeek (不推荐，没有小模型，速度比较慢。非要使用可以用阿里或者字节的deepseek大模型)
     - 申请Key: https://platform.deepseek.com/api_keys
     - 模型： deepseek-reason (R1) 、deepseek-chat (V3)
 - 配置微信公众号`令牌Token`：[微信公众平台](https://mp.weixin.qq.com/)->设置与开发->开发接口管理->基本配置->令牌(Token) 
-- 部署服务（简单举例占用80端口，如果需要别的端口自己配置nginx代理等）
+  
+- 部署服务。下载右侧 Releases 中的二进制文件与  `config.yaml` 同目录，直接执行即可。 (使用`nohup ./wechat-ai-amd64 >> ./data.log 2>&1 &` 后台运行)
 
 - 配置公众号服务器地址(URL)。 填写 `http://服务器IP/wx`（该连接勿手动调用），设置明文方式传输，提交后，点击「启用」。 （初次启用可能要等一会生效）
 
