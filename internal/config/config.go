@@ -2,7 +2,6 @@ package config
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
 
@@ -48,7 +47,6 @@ func init() {
 	viper.UnmarshalKey("llm", &LLM)
 	viper.UnmarshalKey("wechat", &Wechat)
 
-	fmt.Println(LLM)
 	if LLM.Key == "" || LLM.Api == "" || LLM.Model == "" || LLM.MaxTokens <= 0 {
 		log.Println("大模型配置错误")
 		os.Exit(0)

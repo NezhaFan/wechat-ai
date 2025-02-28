@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -63,7 +62,6 @@ func Chat(uid string, msg string) string {
 			size := len(messages)
 			if n < size-1 {
 				copy(messages[1:], messages[size-n:])
-				fmt.Println("变为", messages)
 				messages = messages[:n+1]
 			}
 		}
@@ -71,7 +69,6 @@ func Chat(uid string, msg string) string {
 
 	messages = append(messages, RequestMessage{Role: "user", Content: msg})
 
-	fmt.Println(messages)
 	req := Request{
 		Model:       config.LLM.Model,
 		Messages:    messages,
