@@ -44,18 +44,17 @@ func ReceiveMsg(w http.ResponseWriter, r *http.Request) {
 		}
 	// https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
 	case "voice":
-		msg.Content = msg.Recognition
+		msg.EchoText(w, "暂时不支持语音消息")
 	case "text":
 
 	}
 
-	// log.Println("收到请求：", msg.Content)
 	ch := GetUserChan(msg)
 
 	select {
 	// 前两次超时不回答
 	case <-time.After(time.Second * 5):
-		log.Println("5s超时")
+		// log.Println("5s超时")
 	case result := <-ch:
 		msg.EchoText(w, result)
 	}
@@ -81,9 +80,7 @@ func GetUserChan(msg *wechat.Msg) (ch chan string) {
 
 			select {
 			case <-time.After(time.Second * 14):
-				log.Println("发送超时")
 				ch <- "抱歉，无法在微信限制时间内做出应答"
-				log.Println("发送超时OK")
 			case reply := <-resultCh:
 				ch <- reply
 			}
