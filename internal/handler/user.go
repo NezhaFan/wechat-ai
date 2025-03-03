@@ -42,9 +42,9 @@ func ReceiveMsg(w http.ResponseWriter, r *http.Request) {
 			wechat.EchoSuccess(w)
 			return
 		}
-	// https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
+	// https://developers.weixin.qq.com/community/minihome/doc/0004826962c5c81c0540cb9e365401?page=1
 	case "voice":
-		msg.EchoText(w, "暂时不支持语音消息")
+		msg.EchoText(w, "不好意思哈，我听不到语音消息～")
 	case "text":
 
 	}
@@ -72,7 +72,7 @@ func GetUserChan(msg *wechat.Msg) (ch chan string) {
 		ch = make(chan string, 1)
 		replyCache.Store(msg.MsgId, ch)
 
-		go func() {
+		go func(msgid int64) {
 			resultCh := make(chan string)
 			go func() {
 				resultCh <- model.Chat(msg.FromUserName, msg.Content)
@@ -84,25 +84,11 @@ func GetUserChan(msg *wechat.Msg) (ch chan string) {
 			case reply := <-resultCh:
 				ch <- reply
 			}
-		}()
+			close(ch)
+			replyCache.Delete(msgid)
+		}(msg.MsgId)
 	} else {
 		ch = replyCh.(chan string)
 	}
 	return
-}
-
-func init() {
-	go func() {
-		ticker := time.NewTicker(time.Hour)
-		for range ticker.C {
-			if time.Now().Format("15") == "03" {
-				replyCache.Range(func(key, value any) bool {
-					ch := value.(chan string)
-					close(ch)
-					replyCache.Delete(ch)
-					return true
-				})
-			}
-		}
-	}()
 }

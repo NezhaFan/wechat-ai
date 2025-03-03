@@ -5,14 +5,14 @@ port: 80
 llm:
   api: https://dashscope.aliyuncs.com/compatible-mode/v1
   key: 
-  model: qwen1.5-110b-chat
+  model: qwen-turbo
 
   # 人物预设
   prompt: 你是一只可爱的小猫咪，请每句话都带‘喵～’来回复我。
   # 温度 0-2
   temperature: 1.2
   # 单次回复最大token 1-8192, 设置小一点可以减少回复时间
-  maxtokens: 1000
+  maxtokens: 300
   # 记忆最近几次对话（一问一答为一次），<=0 表示不记忆
   history: 4
 
