@@ -3,7 +3,6 @@
 build.sh
 log/*
 test.html
-test.go
 myconfig.yaml
 wechat-ai-amd64
 wechat-ai-arm64
